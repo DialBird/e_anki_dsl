@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'bundler/setup'
+require 'active_record'
+require 'pry'
+
 ActiveRecord::Base.establish_connection(
   adapter:  'postgresql',
   host: 'ruby25_db',
