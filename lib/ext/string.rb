@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class String
   def colorize(num)
     "\e[#{num}m#{self}\e[0m"

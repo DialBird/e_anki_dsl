@@ -27,25 +27,23 @@ lambda {
 load './vocab_list.rb'
 
 # main
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   each_vocabs do |name, params|
-    begin
-      ActiveRecord::Base.transaction do
-        v = Vocab.new(name: name)
-        env = CleanObject.new
-        env.instance_eval(&params)
-        Vocab::ATTRIBUTES.each do |param|
-          v.send("#{param}=", env.send(param))
-        end
-        v.save!
+    ActiveRecord::Base.transaction do
+      v = Vocab.new(name: name)
+      env = CleanObject.new
+      env.instance_eval(&params)
+      Vocab::ATTRIBUTES.each do |param|
+        v.send("#{param}=", env.send(param))
       end
-      puts "#{name.red} is perfectly registered!"
-    rescue ActiveRecord::RecordInvalid => e
-      if e.message.include?('has already been taken')
-        puts "Sorry but #{e.record.name.red} is already registered"
-      else
-        puts "Error with #{e.record.name.red}: #{e.message}"
-      end
+      v.save!
+    end
+    puts "#{name.red} is perfectly registered!"
+  rescue ActiveRecord::RecordInvalid => e
+    if e.message.include?('has already been taken')
+      puts "Sorry but #{e.record.name.red} is already registered"
+    else
+      puts "Error with #{e.record.name.red}: #{e.message}"
     end
   end
 end
