@@ -32,4 +32,8 @@ class Vocab < ActiveRecord::Base
   validates :wrong1, presence: true
   validates :wrong2, presence: true
   validates :wrong3, presence: true
+
+  def wrongs(w1, w2, w3)
+    self.wrong1, self.wrong2, self.wrong3 = w1, w2, w3
+  end
 end

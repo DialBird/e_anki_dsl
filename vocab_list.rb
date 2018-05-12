@@ -2,37 +2,32 @@
 
 # POINT: FOLLOW THIS PATTERN
 #
-# remember 'happy' do
-#   @answer = '幸せ'
-#   @wrong1 = '悲しい'
-#   @wrong2 = '料理する'
-#   @wrong3 = '大変な'
+# remember 'happy' do |vocab|
+#   vocab.answer = '幸せ'
+#   vocab.wrongs '悲しい', '料理する', '大変な'
 # end
 
-remember 'eliminate' do
-  @answer = '除外する'
-  @wrong1 = '加える'
-  @wrong2 = '料理する'
-  @wrong3 = '飛ぶ'
+remember 'eliminate' do |vocab|
+  vocab.answer = '除外する'
+  vocab.wrongs '加える', '料理する', '飛ぶ'
 end
 
-remember 'justify' do
-  @answer = '正当化する'
-  @wrong1 = '間違う'
-  @wrong2 = '調節する'
-  @wrong3 = '困る'
+remember 'sensible' do |vocab|
+  vocab.answer = '賢明な'
+  vocab.wrongs '加える', '過激な', '静かな'
 end
 
-remember 'flutter' do
-  @answer = 'お世辞を言う'
-  @wrong1 = '間違う'
-  @wrong2 = '笑う'
-  @wrong3 = '困る'
+remember 'justify' do |vocab|
+  vocab.answer = '正当化する'
+  vocab.wrongs '間違う', '調節する', '困る'
 end
 
-remember 'happy' do
-  @answer = '幸せ'
-  @wrong1 = '悲しい'
-  @wrong2 = '料理する'
-  @wrong3 = '大変な'
+remember 'flutter' do |vocab|
+  vocab.answer = 'お世辞を言う'
+  vocab.wrongs '間違う', '笑う', '困る'
+end
+
+remember 'happy' do |vocab|
+  vocab.answer = '幸せ'
+  vocab.wrongs '悲しい', '料理する', '大変な'
 end

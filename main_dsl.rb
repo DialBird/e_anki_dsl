@@ -8,15 +8,17 @@ require './schema'
 Dir.glob('./lib/ext/*.rb').each { |f| require f }
 
 lambda {
-  vocabs = {}
+  vocabs = []
 
-  define_method :remember do |vocab, &block|
-    vocabs[vocab] = block
+  define_method :remember do |name, &block|
+    v = Vocab.new(name: name)
+    block.call v
+    vocabs << v
   end
 
   define_method :each_vocabs do |&block|
-    vocabs.each do |key, val|
-      block.call [key, val]
+    vocabs.each do |vocab|
+      block.call vocab
     end
   end
 
@@ -29,17 +31,11 @@ load './vocab_list.rb'
 
 # main
 if $PROGRAM_NAME == __FILE__
-  each_vocabs do |name, params|
+  each_vocabs do |vocab|
     ActiveRecord::Base.transaction do
-      v = Vocab.new(name: name)
-      env = CleanObject.new
-      env.instance_eval(&params)
-      Vocab::ATTRIBUTES.each do |param|
-        v.send("#{param}=", env.send(param))
-      end
-      v.save!
+      vocab.save!
     end
-    puts "#{name.red} is perfectly registered!"
+    puts "#{vocab.name.red} is perfectly registered!"
   rescue ActiveRecord::RecordInvalid => e
     if e.message.include?('has already been taken')
       puts "Sorry but #{e.record.name.red} is already registered"
