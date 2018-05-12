@@ -3,8 +3,9 @@
 require 'bundler/setup'
 require 'active_record'
 require 'pry'
+require './schema'
 
-Dir.glob('./lib/**/*.rb').each { |f| require f }
+Dir.glob('./lib/ext/*.rb').each { |f| require f }
 
 lambda {
   vocabs = {}
