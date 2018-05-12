@@ -14,7 +14,7 @@ namespace :vocab do
       v = vocabs.sample
       q_list = [v.answer, v.wrong1, v.wrong2, v.wrong3].shuffle
 
-      puts <<~EOF
+      puts <<~TEXT
         Question #{idx + 1}
 
         #{v.name}
@@ -24,7 +24,7 @@ namespace :vocab do
         3) #{q_list[2]}
         4) #{q_list[3]}
 
-      EOF
+      TEXT
 
       loop do
         case answer = STDIN.gets.chomp.to_i
