@@ -3,13 +3,10 @@
 require 'bundler/setup'
 require 'active_record'
 require 'pry'
+require 'yaml'
 
-ActiveRecord::Base.establish_connection(
-  adapter:  'postgresql',
-  host: 'ruby25_db',
-  username: 'root',
-  database: 'e_anki_dsl'
-)
+db_conf = YAML.load_file('./config/database.yml')
+ActiveRecord::Base.establish_connection(db_conf['development'])
 
 # ActiveRecord::Schema.define do
 #   create_table :vocabs, force: true do |t|

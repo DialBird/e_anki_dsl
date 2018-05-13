@@ -1,0 +1,13 @@
+
+default: &default
+  adapter: postgresql
+  host: ruby25_db
+  username: root
+
+development:
+  <<: *default
+  database: 'e_anki_dsl'
+
+test:
+  <<: *default
+  database: 'e_anki_dsl_test'
