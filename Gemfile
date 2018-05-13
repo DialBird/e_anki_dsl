@@ -7,7 +7,14 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'activerecord'
 gem 'pg'
-gem 'pry-byebug'
 gem 'rake'
-gem 'rspec'
-gem 'factory_bot'
+
+group :development, :test do
+  gem 'rspec'
+  gem 'factory_bot'
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'database_cleaner'
+end
